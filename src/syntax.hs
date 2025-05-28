@@ -14,7 +14,6 @@ import Numeric.Natural
  -
  - Se sigue que Σ ∈ ℕ →  ℤ.
  -
- - -------------------------------- 
  - -}
 
 type Var = Natural
@@ -49,7 +48,7 @@ data BoolExp
 
 {- 
  - Por costumbre, siglas en inglés: Less than (Le), Less or equal (Le), etc. 
- - El cipayismo es total.
+ - (El cipayismo es total.)
  - -}
 data OpRel = Lt | Le | Eq | Ne | Ge | Gt deriving (Show)
 data OpBool = And | Or | Imp | Iff deriving (Show)
