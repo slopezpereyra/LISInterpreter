@@ -59,6 +59,23 @@ semRel Gt = (>)
 semBoolOp :: OpBool -> Bool -> Bool -> Bool
 semBoolOp And = (&&)
 semBoolOp Or  = (||)
-semBoolOp Implies = \a b -> not a || b  {- Usamos la definición de la implicancia -}
+semBoolOp Imp = \a b -> not a || b  {- Usamos la definición de la implicancia -}
 semBoolOp Iff = (==) {- Dudoso? -}
 
+
+{-  
+ -                Semántica de comandos
+ -}
+
+
+semComm :: Comm -> State -> State 
+semComm Skip σ = σ
+semComm (Assign v e) σ = actualizar σ v (semIntExp e σ)
+semComm (IfThenElse b c1 c2) σ =
+  if semBoolExp b σ then semComm c1 σ else semComm c2 σ
+
+semComm (Concat c1 c2) σ = semComm c2 σ' 
+                        where σ' = semComm c1 σ
+semComm (While b c) σ =
+  if semBoolExp b σ then semComm (While b c) σ' else σ
+                        where σ' = semComm c σ
