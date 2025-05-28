@@ -29,3 +29,7 @@ actualizar σ v n = \x -> if x == v then n else σ x
 actualizarMultiple :: State -> [( Var, Integer )] -> State 
 actualizarMultiple = foldl ( \σ' (v, n) -> actualizar σ' v n)
 
+-- Para facilitarnos la vida al testear, definimos de base el estado `idState`,
+-- que mapea todos los naturales a sí mismos. (El estado con la primera variable
+-- en 1, la segunda en 2, etc.)
+idState = fromIntegral :: Natural -> Integer
