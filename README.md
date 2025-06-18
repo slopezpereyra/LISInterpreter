@@ -4,8 +4,6 @@ Intérprete básico de LIS en Haskell. Se define la sintaxis abstracta con las
 reglas de construcción tomadas del apunte. Se define una semántica basada en
 estados y la evalución de dicha semántica.
 
-This project implements a small imperative language in Haskell, including its **abstract syntax**, **state-based semantics**, and **evaluation**.
-
 # Como iniciar
 
 Desde el directorio del repo:
