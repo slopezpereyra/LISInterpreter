@@ -1,7 +1,12 @@
 module Semantics where 
 
+
 import Syntax
 import State
+{- 
+ - Para la semántica del while tomamos fix que nos da el menor punto fijo
+ - -}
+import Data.Function (fix)
 
 {-  
  -
@@ -76,6 +81,12 @@ semComm (IfThenElse b c1 c2) σ =
 
 semComm (Concat c1 c2) σ = semComm c2 σ' 
                         where σ' = semComm c1 σ
+
+
 semComm (While b c) σ =
-  if semBoolExp b σ then semComm (While b c) σ' else σ
-                        where σ' = semComm c σ
+  fix f σ
+  where
+    f rec σ' =
+      if semBoolExp b σ'
+        then rec (semComm c σ')
+        else σ'
